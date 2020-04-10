@@ -1,0 +1,31 @@
+os: linux
+dist: bionic
+language: minimal
+services:
+  - docker
+
+# Variables:
+#
+#   APP_NAME: Aplication name
+#   DOCKERHUB_USERNAME: Your dockerhub username
+#   DOCKERHUB_PASSWORD: Your dockerhub password or token
+#   DOCKERHUB_REGISTRY: Your registry adress (docker.io for hub.docker.com)
+
+before_install:
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  - sudo apt-get update
+  - sudo apt-get install --assume-yes --option Dpkg::Options::="--force-confnew" docker-ce
+
+script:
+  - docker build --pull --no-cache --tag "$APP_NAME" .
+
+after_success:
+  - export BUILD_DATE="$(date +%Y-%m-%d)"
+  - echo "$DOCKERHUB_PASSWORD" | docker login --username "$DOCKERHUB_USERNAME" --password-stdin "$DOCKERHUB_REGISTRY"
+  - docker images
+  - docker tag "$APP_NAME" "$DOCKERHUB_USERNAME"/"$APP_NAME":"$BUILD_DATE"
+  - docker push "$DOCKERHUB_USERNAME"/"$APP_NAME":"$BUILD_DATE"
+  - docker tag "$APP_NAME" "$DOCKERHUB_USERNAME"/"$APP_NAME":latest
+  - docker push "$DOCKERHUB_USERNAME"/"$APP_NAME":latest
+  - docker logout
