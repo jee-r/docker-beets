@@ -5,7 +5,7 @@ steps:
 - name: build_master
   image: plugins/docker:latest
   settings:
-    repo: j33r/deluge
+    repo: j33r/beets
     tags: latest
     dockerfile: Dockerfile
     username: j33r
@@ -21,7 +21,7 @@ steps:
 - name: build_dev
   image: plugins/docker:latest
   settings:
-    repo: j33r/deluge
+    repo: j33r/beets
     tags: dev
     dockerfile: Dockerfile
     username: j33r
@@ -38,7 +38,7 @@ steps:
 - name: test
   image: plugins/docker:latest
   settings:
-    repo: j33r/deluge
+    repo: j33r/beets
     tags: latest
     dockerfile: Dockerfile
     username: j33r
