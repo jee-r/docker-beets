@@ -1,6 +1,12 @@
 FROM python:slim
 LABEL "Maintainer"="Jee <jee@eer.fr>"
 
+LABEL name="docker-beets" \
+      maintainer="Jee jee@eer.fr" \
+      description="Beets is the media library management system for obsessive music geeks." \
+      url="https://beets.io" \
+      org.label-schema.vcs-url="https://github.com/jee-r/docker-beets"
+
 ENV build_deps="build-essential"
 
 RUN apt-get update && \
