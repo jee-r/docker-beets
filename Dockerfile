@@ -6,7 +6,7 @@ LABEL name="docker-beets" \
       url="https://beets.io" \
       org.label-schema.vcs-url="https://github.com/jee-r/docker-beets"
 
-ENV build_deps="build-essential"
+ARG build_deps="build-essential"
 
 RUN apt-get update && \
 	apt-get upgrade -y && \
