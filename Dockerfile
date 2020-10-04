@@ -109,7 +109,8 @@ RUN echo "**** install pip packages ****" && \
       pylast \
       pycairo \
       PyGObject \
-      beets \
+      https://github.com/beetbox/beets/tarball/master \
+      mediafile \
       beets-extrafiles \
       beets-mpdqueue \
       beets-bandcamp \
