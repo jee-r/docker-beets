@@ -86,7 +86,7 @@ RUN echo "**** compile mp3val ****" && \
     cp -p mp3val /usr/bin
 
 RUN echo "**** compile chromaprint ****" && \
-    git clone https://bitbucket.org/acoustid/chromaprint.git /tmp/chromaprint && \
+    git clone https://github.com/acoustid/chromaprint.git /tmp/chromaprint && \
     cd /tmp/chromaprint && \
     cmake -DBUILD_TOOLS=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr && \
     make && \
