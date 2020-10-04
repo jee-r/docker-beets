@@ -116,6 +116,7 @@ RUN echo "**** install pip packages ****" && \
       beets-bandcamp \
       beets-copyartifacts \
       discogs-client \
+      beets-lidarr-fields \
       flask \
       pillow \
       pip \
