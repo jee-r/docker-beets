@@ -10,7 +10,7 @@ steps:
     dockerfile: Dockerfile
     username: j33r
     password:
-      from_secret: DOCKER_HUB_TOKKEN
+      from_secret: DOCKER_HUB_TOKEN
   when:
     branch:
       - master
@@ -26,13 +26,15 @@ steps:
     dockerfile: Dockerfile
     username: j33r
     password:
-      from_secret: DOCKER_HUB_TOKKEN
+      from_secret: DOCKER_HUB_TOKEN
   when:
     branch:
       - dev
     event:
       exclude:
         - pull_request
+
+
 
 
 - name: test
@@ -43,7 +45,7 @@ steps:
     dockerfile: Dockerfile
     username: j33r
     password:
-      from_secret: DOCKER_HUB_TOKKEN
+      from_secret: DOCKER_HUB_TOKEN
     dry_run: true
   when:
     event:
