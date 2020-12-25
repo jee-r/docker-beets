@@ -95,10 +95,8 @@ RUN sed -i 's/http:\/\/dl-cdn.alpinelinux.org/https:\/\/mirrors.ircam.fr\/pub/' 
         beautifulsoup4 \
         pylast \
         https://github.com/beetbox/beets/tarball/master \
-        beets-extrafiles \
-        beets-mpdqueue \
+        https://github.com/Holzhaus/beets-extrafiles/tarball/master \
         beets-bandcamp \
-        beets-copyartifacts \
         discogs-client \
         beets-lidarr-fields \
         flask \
