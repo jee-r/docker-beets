@@ -35,6 +35,22 @@ steps:
       exclude:
         - pull_request
 
+- name: build_alpine
+  image: plugins/docker:latest
+  settings:
+    repo: j33r/beets
+    tags: alpine
+    dockerfile: Dockerfile
+    username: j33r
+    password:
+      from_secret: DOCKER_HUB_TOKEN
+  when:
+    branch:
+      - alpine
+    event:
+      exclude:
+        - pull_request
+
 - name: mirroring_github
   pull: always
   image: j33r/git-mirror:latest
@@ -47,6 +63,7 @@ steps:
     branch:
       - master
       - dev
+      - alpine
     event:
       exclude:
         - pull_request
