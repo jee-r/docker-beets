@@ -80,31 +80,32 @@ RUN sed -i 's/http:\/\/dl-cdn.alpinelinux.org/https:\/\/mirrors.ircam.fr\/pub/' 
     make install && \
     echo "## install pip packages ##" && \
     pip3 install --no-cache-dir --upgrade \
-      pip \
-      configparser \
-      ndg-httpsclient \
-      notify \
-      paramiko \
-      pillow \
-      psutil \
-      pyopenssl \
-      requests \
-      setuptools \
-      urllib3 \
-      beautifulsoup4 \
-      pylast \
-      https://github.com/beetbox/beets/tarball/master \
-      beets-extrafiles \
-      beets-mpdqueue \
-      beets-bandcamp \
-      beets-copyartifacts \
-      discogs-client \
-      beets-lidarr-fields \
-      flask \
-      pillow \
-      pyacoustid \
-      requests \
-      unidecode && \
+        pip \
+        wheel \
+        configparser \
+        ndg-httpsclient \
+        notify \
+        paramiko \
+        pillow \
+        psutil \
+        pyopenssl \
+        requests \
+        setuptools \
+        urllib3 \
+        beautifulsoup4 \
+        pylast \
+        https://github.com/beetbox/beets/tarball/master \
+        beets-extrafiles \
+        beets-mpdqueue \
+        beets-bandcamp \
+        beets-copyartifacts \
+        discogs-client \
+        beets-lidarr-fields \
+        flask \
+        pillow \
+        pyacoustid \
+        requests \
+        unidecode && \
     apk del --purge build-dependencies && \
     rm -rf /tmp/*
 
