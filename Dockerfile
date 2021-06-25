@@ -113,5 +113,4 @@ RUN apk update && \
     apk del --purge build-dependencies && \
     rm -rf /tmp/*
 
-COPY ./run.sh /usr/local/bin/run.sh
-CMD ["/usr/local/bin/run.sh"]
+CMD ["/usr/local/bin/entrypoint.sh"]
