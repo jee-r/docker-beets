@@ -1,13 +1,12 @@
-FROM alpine:3.12
+FROM alpine:3.14
 
 LABEL name="docker-beets" \
       maintainer="Jee jee@jeer.fr" \
       description="Beets is the media library management system for obsessive music geeks." \
       url="https://beets.io" \
-      org.label-schema.vcs-url="https://git.c0de.in/docker/beets"
+      org.label-schema.vcs-url="https://github.com/jee-r/docker-beets"
 
-RUN sed -i 's/http:\/\/dl-cdn.alpinelinux.org/https:\/\/mirrors.ircam.fr\/pub/' /etc/apk/repositories && \
-    apk update && \
+RUN apk update && \
     apk upgrade && \
     apk add --no-cache --virtual=base --upgrade \
         bash \
