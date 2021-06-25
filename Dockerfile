@@ -77,7 +77,7 @@ RUN apk update && \
     cd /tmp/chromaprint && \
     cmake -DBUILD_TOOLS=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr && \
     make -j$(nproc) && \
-    make -j$(nproc) nstall && \
+    make -j$(nproc) install && \
     pip3 install --no-cache-dir --upgrade \
         pip \
         wheel \
@@ -94,8 +94,7 @@ RUN apk update && \
         beautifulsoup4 \
         pillow \
         requests \
-        unidecode && \
-    pip3 install --no-cache-dir --upgrade \
+        unidecode \
         pylast \
         https://github.com/beetbox/beets/tarball/master \
         https://github.com/Holzhaus/beets-extrafiles/tarball/master \
