@@ -77,7 +77,7 @@ RUN apk update && \
     cd /tmp/chromaprint && \
     cmake -DBUILD_TOOLS=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr && \
     make -j$(nproc) && \
-    make i-j$(nproc) nstall && \
+    make -j$(nproc) nstall && \
     pip3 install --no-cache-dir --upgrade \
         pip \
         wheel \
