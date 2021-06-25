@@ -62,20 +62,17 @@ RUN apk update && \
         py3-pylast \
         python3 \
         sqlite-libs && \
-    echo "## compile mp3gain ##" && \
     mkdir -p /tmp/mp3gain-src /tmp/mp3val-src && \
     curl -o /tmp/mp3gain-src/mp3gain.zip -sL https://sourceforge.net/projects/mp3gain/files/mp3gain/1.6.2/mp3gain-1_6_2-src.zip && \
     cd /tmp/mp3gain-src && \
     unzip -qq /tmp/mp3gain-src/mp3gain.zip && \
     make -j$(nproc) INSTALL_PATH=/usr/bin && \
     make -j$(nproc) install INSTALL_PATH=/usr/bin && \
-    echo "## compile mp3val ##" && \
     curl -o /tmp/mp3val-src/mp3val.tar.gz -sL https://downloads.sourceforge.net/mp3val/mp3val-0.1.8-src.tar.gz && \
     cd /tmp/mp3val-src && \
     tar xzf /tmp/mp3val-src/mp3val.tar.gz --strip 1 && \
     make -j$(nproc) -f Makefile.linux && \
     cp -p mp3val /usr/bin && \
-    echo "## compile chromaprint ##" && \
     git clone https://github.com/acoustid/chromaprint.git /tmp/chromaprint && \
     cd /tmp/chromaprint && \
     cmake -DBUILD_TOOLS=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr && \
@@ -98,7 +95,6 @@ RUN apk update && \
         pillow \
         requests \
         unidecode && \
-    echo "## install pip packages ##" && \
     pip3 install --no-cache-dir --upgrade \
         pylast \
         https://github.com/beetbox/beets/tarball/master \
