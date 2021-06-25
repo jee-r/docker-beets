@@ -6,6 +6,9 @@ LABEL name="docker-beets" \
       url="https://beets.io" \
       org.label-schema.vcs-url="https://github.com/jee-r/docker-beets"
 
+COPY rootfs /
+ENV HOME=/config
+
 RUN apk update && \
     apk upgrade && \
     apk add --no-cache --virtual=base --upgrade \
@@ -28,6 +31,8 @@ RUN apk update && \
         cmake \
         g++ \
         gcc \
+        musl-dev \
+        cargo \
         libffi-dev \
         python3-dev \
         openssl-dev \
@@ -77,13 +82,12 @@ RUN apk update && \
     cmake -DBUILD_TOOLS=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr && \
     make && \
     make install && \
-    echo "## install pip packages ##" && \
     pip3 install --no-cache-dir --upgrade \
         pip \
         wheel \
+        notify \
         configparser \
         ndg-httpsclient \
-        notify \
         paramiko \
         pillow \
         psutil \
@@ -92,6 +96,11 @@ RUN apk update && \
         setuptools \
         urllib3 \
         beautifulsoup4 \
+        pillow \
+        requests \
+        unidecode && \
+    echo "## install pip packages ##" && \
+    pip3 install --no-cache-dir --upgrade \
         pylast \
         https://github.com/beetbox/beets/tarball/master \
         https://github.com/Holzhaus/beets-extrafiles/tarball/master \
@@ -99,10 +108,8 @@ RUN apk update && \
         discogs-client \
         beets-lidarr-fields \
         flask \
-        pillow \
-        pyacoustid \
-        requests \
-        unidecode && \
+        pyacoustid && \
+    chmod +x /usr/local/bin/entrypoint.sh && \
     apk del --purge build-dependencies && \
     rm -rf /tmp/*
 
