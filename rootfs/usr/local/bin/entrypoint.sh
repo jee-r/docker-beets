@@ -1,5 +1,12 @@
 #!/bin/bash
 
+if [ -w /config ] && [ ! -f /config/config.yaml ]; then
+    wget -O /config/config.yaml https://raw.githubusercontent.com/beetbox/beets/master/beets/config_default.yaml
+    sed -i 's/library.db/\/config\/library.db/g' /config/config.yaml
+    sed -i 's/\~\/Music/\/Music/g' /config/config.yaml
+fi
+
+
 beets_dir="/config/beets"
 beets_config="/config/config.yaml"
 #watch_dir="/torrents/seed/Music"
