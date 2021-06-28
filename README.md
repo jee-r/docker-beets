@@ -33,7 +33,7 @@ From [beets.io](https://beets.io):
 
 All the lines commented in the examples below should be adapted to your environment. 
 
-Note: --user $(id -u):$(id -g) should work out of the box on linux systems. If your docker host run on windows or if you want specify an other user id and group id just replace with the appropriates values.
+Note: `--user $(id -u):$(id -g)` should work out of the box on linux systems. If your docker host run on windows or if you want specify an other user id and group id just replace with the appropriates values.
 
 ## With Docker
 
