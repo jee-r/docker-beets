@@ -7,6 +7,7 @@ steps:
 - name: master_build
   image: plugins/docker:latest
   settings:
+    mirror: https://mirror.gcr.io
     repo: j33r/beets
     dockerfile: Dockerfile
     tags:
@@ -26,6 +27,7 @@ steps:
 - name: dev_build
   image: plugins/docker:latest
   settings:
+    mirror: https://mirror.gcr.io
     repo: j33r/beets
     dockerfile: Dockerfile
     tags:
@@ -51,6 +53,7 @@ steps:
 - name: test
   image: plugins/docker:latest
   settings:
+    mirror: https://mirror.gcr.io
     repo: j33r/beets
     tags: latest
     dockerfile: Dockerfile
