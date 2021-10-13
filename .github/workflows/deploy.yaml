@@ -18,7 +18,7 @@ jobs:
           else
             echo "MAIN_DOCKER_TAG=$GIT_BRANCH" >> $GITHUB_ENV
           fi
-          echo "${{ MAIN_DOCKER_TAG }}"
+          echo "$MAIN_DOCKER_TAG"
       - name: remove docker from repo name
         run: |
           echo "IMAGE_NAME=$(echo ${{ github.repository }} | sed 's|^docker-||g')" >> $GITHUB_ENV
