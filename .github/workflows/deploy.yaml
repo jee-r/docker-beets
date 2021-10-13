@@ -15,6 +15,8 @@ jobs:
           if $GIT_BRANCH == "main" || $GIT_BRANCH == "master"; then
             echo "MAIN_DOCKER_TAG=latest" >> $GITHUB_ENV
           fi
+          echo $GIT_BRANCH
+          echo ${MAIN_DOCKER_TAG:-$GIT_BRANCH}
       - name: remove docker from repo name
         run: |
           echo "IMAGE_NAME=$(echo ${{ github.repository }} | sed 's|^docker-||g')" >> $GITHUB_ENV
@@ -44,7 +46,7 @@ jobs:
           tags: |
             ghcr.io/${{ github.repository }}:${SHORT_SHA}
             ghcr.io/${{ github.repository }}:${MAIN_DOCKER_TAG:-$GIT_BRANCH}
-            ghcr.io/${{ github.repository }}:${{ GIT_BRANCH }}
+            ghcr.io/${{ github.repository }}:${GIT_BRANCH}
             ${{ IMAGE_NAME }}:${SHORT_SHA}
             ${{ IMAGE_NAME }}:${MAIN_DOCKER_TAG:-$GIT_BRANCH}
-            ${{ IMAGE_NAME }}:${{ GIT_BRANCH }}
+            ${{ IMAGE_NAME }}:${GIT_BRANCH} 
