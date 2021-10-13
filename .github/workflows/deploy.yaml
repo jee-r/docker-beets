@@ -12,19 +12,19 @@ jobs:
       - name: Get branch
         run: |
           echo "GIT_BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
-          echo $env.GIT_BRANCH
+          echo "${{ env.GIT_BRANCH }}"
           if [[ $GIT_BRANCH == "main" ]] || [[ $GIT_BRANCH == "master" ]]; then
             echo "MAIN_DOCKER_TAG=latest" >> $GITHUB_ENV
           fi
-          echo ${env.MAIN_DOCKER_TAG:-$env.GIT_BRANCH}
+          echo "${{ env.MAIN_DOCKER_TAG:-$env.GIT_BRANCH }}"
       - name: remove docker from repo name
         run: |
           echo "IMAGE_NAME=$(echo ${{ github.repository }} | sed 's|^docker-||g')" >> $GITHUB_ENV
-          echo "$env.IMAGE_NAME"
+          echo "${{ env.IMAGE_NAME }}"
       - name: crop sha
         run: |
           echo "echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV"
-          echo "$env.SHORT_SHA"
+          echo "${{ env.SHORT_SHA }}"
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Set up Docker Buildx
