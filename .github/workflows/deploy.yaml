@@ -25,6 +25,8 @@ jobs:
       - name: crop SHA
         run: |
           echo "echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV"
+      - name: print env
+        run: echo $ENV
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Set up Docker Buildx
