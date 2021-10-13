@@ -4,6 +4,7 @@ on:
     branches:
       - master
       - dev
+      - multistage
 jobs:
   build:
     name: Build, tag, and publish Docker image
