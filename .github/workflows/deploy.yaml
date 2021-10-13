@@ -17,7 +17,7 @@ jobs:
           fi
       - name: remove docker from repo name
         run: |
-          echo "IMAGE_NAME=$(echo $GITHUB_REPOSITORY | sed 's|^docker-||g')" >> $GITHUB_ENV
+          echo "IMAGE_NAME=`echo ${GITHUB_REPOSITORY} | sed 's|^docker-||g'`" >> $GITHUB_ENV
       -name: crop sha
         run: |
           echo "echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV"
