@@ -24,7 +24,7 @@ jobs:
           echo "IMAGE_NAME=$(echo ${{ github.repository }} | sed 's|^jee-r/docker-||g')" >> $GITHUB_ENV
       - name: crop SHA
         run: |
-          echo "echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV"
+          echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV"
       - name: print env
         run: echo $ENV
       - name: Checkout repository
