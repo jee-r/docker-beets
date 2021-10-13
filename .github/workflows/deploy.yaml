@@ -22,11 +22,11 @@ jobs:
       - name: remove docker from repo name
         run: |
           echo "IMAGE_NAME=$(echo ${{ github.repository }} | sed 's|^docker-||g')" >> $GITHUB_ENV
-          echo "${{ IMAGE_NAME }}"
+          echo "$IMAGE_NAME"
       - name: crop sha
         run: |
           echo "echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV"
-          echo "${{ SHORT_SHA }}"
+          echo "$SHORT_SHA"
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Set up Docker Buildx
