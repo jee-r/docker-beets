@@ -13,6 +13,7 @@ jobs:
         run: |
           echo "GIT_BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
       - name: Set main docker image tag 
+        run: |
           if [[ "$i{{ env.GIT_BRANCH }}" == "main" ]] || [[ "${{ env.GIT_BRANCH }}" == "master" ]]; then
             echo "MAIN_DOCKER_TAG=latest" >> $GITHUB_ENV
           else
