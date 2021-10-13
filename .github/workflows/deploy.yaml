@@ -16,7 +16,7 @@ jobs:
           if [[ $GIT_BRANCH == "main" ]] || [[ $GIT_BRANCH == "master" ]]; then
             echo "MAIN_DOCKER_TAG=latest" >> $GITHUB_ENV
           fi
-          echo "${{ env.MAIN_DOCKER_TAG:-$env.GIT_BRANCH }}"
+          echo "${{ env.MAIN_DOCKER_TAG:-env.GIT_BRANCH }}"
       - name: remove docker from repo name
         run: |
           echo "IMAGE_NAME=$(echo ${{ github.repository }} | sed 's|^docker-||g')" >> $GITHUB_ENV
