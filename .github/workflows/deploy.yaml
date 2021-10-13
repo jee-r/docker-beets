@@ -12,10 +12,10 @@ jobs:
       - name: Get branch
         run: |
           echo "GIT_BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
-          if [ $GIT_BRANCH == "main" ] || [ $GIT_BRANCH == "master"]; then
+          echo $GIT_BRANCH
+          if [[ $GIT_BRANCH == "main" ]] || [[ $GIT_BRANCH == "master" ]]; then
             echo "MAIN_DOCKER_TAG=latest" >> $GITHUB_ENV
           fi
-          echo $GIT_BRANCH
           echo ${MAIN_DOCKER_TAG:-$GIT_BRANCH}
       - name: remove docker from repo name
         run: |
