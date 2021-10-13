@@ -4,7 +4,8 @@ LABEL name="docker-beets" \
       maintainer="Jee jee@jeer.fr" \
       description="Beets is the media library management system for obsessive music geeks." \
       url="https://beets.io" \
-      org.label-schema.vcs-url="https://github.com/jee-r/docker-beets"
+      org.label-schema.vcs-url="https://github.com/jee-r/docker-beets" \
+      org.opencontainers.image.source="https://github.com/jee-r/docker-beets"
 
 COPY rootfs /
 ENV HOME=/config
