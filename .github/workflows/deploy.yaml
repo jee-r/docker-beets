@@ -47,6 +47,6 @@ jobs:
             ghcr.io/${{ github.repository }}:${SHORT_SHA}
             ghcr.io/${{ github.repository }}:${MAIN_DOCKER_TAG:-$GIT_BRANCH}
             ghcr.io/${{ github.repository }}:${GIT_BRANCH}
-            ${{ IMAGE_NAME }}:${SHORT_SHA}
-            ${{ IMAGE_NAME }}:${MAIN_DOCKER_TAG:-$GIT_BRANCH}
-            ${{ IMAGE_NAME }}:${GIT_BRANCH} 
+            ${IMAGE_NAME}:${SHORT_SHA}
+            ${IMAGE_NAME}:${MAIN_DOCKER_TAG:-$GIT_BRANCH}
+            ${IMAGE_NAME}:${GIT_BRANCH} 
