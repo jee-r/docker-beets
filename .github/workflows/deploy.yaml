@@ -12,19 +12,19 @@ jobs:
       - name: Get branch
         run: |
           echo "GIT_BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
-          echo $GIT_BRANCH
+          echo $env.GIT_BRANCH
           if [[ $GIT_BRANCH == "main" ]] || [[ $GIT_BRANCH == "master" ]]; then
             echo "MAIN_DOCKER_TAG=latest" >> $GITHUB_ENV
           fi
-          echo ${MAIN_DOCKER_TAG:-$GIT_BRANCH}
+          echo ${env.MAIN_DOCKER_TAG:-$env.GIT_BRANCH}
       - name: remove docker from repo name
         run: |
           echo "IMAGE_NAME=$(echo ${{ github.repository }} | sed 's|^docker-||g')" >> $GITHUB_ENV
-          echo "$IMAGE_NAME"
+          echo "$env.IMAGE_NAME"
       - name: crop sha
         run: |
           echo "echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV"
-          echo "$SHORT_SHA"
+          echo "$env.SHORT_SHA"
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Set up Docker Buildx
@@ -46,9 +46,9 @@ jobs:
           platforms: linux/amd64,linux/arm64,linux/arm/v7
           push: true
           tags: |
-            ghcr.io/${{ github.repository }}:${SHORT_SHA}
-            ghcr.io/${{ github.repository }}:${MAIN_DOCKER_TAG:-$GIT_BRANCH}
-            ghcr.io/${{ github.repository }}:${GIT_BRANCH}
-            ${IMAGE_NAME}:${SHORT_SHA}
-            ${IMAGE_NAME}:${MAIN_DOCKER_TAG:-$GIT_BRANCH}
-            ${IMAGE_NAME}:${GIT_BRANCH} 
+            ghcr.io/${{ github.repository }}:${{ env.SHORT_SHA }}
+            ghcr.io/${{ github.repository }}:${env.MAIN_DOCKER_TAG:-$env.GIT_BRANCH}
+            ghcr.io/${{ github.repository }}:${{ env.GIT_BRANCH }}
+            ${{ env.IMAGE_NAME }}:${{ env.SHORT_SHA }}
+            ${{ env.IMAGE_NAME }}:${env.MAIN_DOCKER_TAG:-$env.GIT_BRANCH}
+            ${{ env.IMAGE_NAME }}:${{ env.GIT_BRANCH }} 
