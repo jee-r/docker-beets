@@ -1,4 +1,20 @@
-FROM alpine:3.14
+FROM alpine:3.14.2 AS builder-mp3gain
+WORKDIR /tmp
+COPY build/mp3gain/APKBUILD .
+RUN apk update && \
+    apk add --no-cache abuild && \
+    abuild-keygen -a -n && \
+    REPODEST=/tmp/out abuild -F -r
+
+FROM alpine:3.14.2 AS builder-mp3val
+WORKDIR /tmp
+COPY build/mp3val/APKBUILD .
+RUN apk update && \
+    apk add --no-cache abuild && \
+    abuild-keygen -a -n && \
+    REPODEST=/tmp/out abuild -F -r
+
+FROM python:3.10-alpine3.14
 
 LABEL name="docker-beets" \
       maintainer="Jee jee@jeer.fr" \
@@ -8,6 +24,9 @@ LABEL name="docker-beets" \
       org.opencontainers.image.source="https://github.com/jee-r/docker-beets"
 
 COPY rootfs /
+COPY --from=builder-mp3gain /tmp/out/*/*.apk /pkgs/
+COPY --from=builder-mp3val /tmp/out/*/*.apk /pkgs/
+
 ENV HOME=/config
 
 RUN apk update && \
@@ -44,6 +63,7 @@ RUN apk update && \
         fftw-dev && \
     apk add --upgrade --no-cache \
         inotify-tools \
+        chromaprint \
         expat \
         ffmpeg \
         ffmpeg-libs \
@@ -58,52 +78,19 @@ RUN apk update && \
         libpng \
         mpg123 \
         openjpeg \
-        py3-gobject3 \
-        py3-pip \
-        py3-pylast \
-        python3 \
         sqlite-libs && \
-    mkdir -p /tmp/mp3gain-src /tmp/mp3val-src && \
-    curl -o /tmp/mp3gain-src/mp3gain.zip -sL https://sourceforge.net/projects/mp3gain/files/mp3gain/1.6.2/mp3gain-1_6_2-src.zip && \
-    cd /tmp/mp3gain-src && \
-    unzip -qq /tmp/mp3gain-src/mp3gain.zip && \
-    make -j$(nproc) INSTALL_PATH=/usr/bin && \
-    make -j$(nproc) install INSTALL_PATH=/usr/bin && \
-    curl -o /tmp/mp3val-src/mp3val.tar.gz -sL https://downloads.sourceforge.net/mp3val/mp3val-0.1.8-src.tar.gz && \
-    cd /tmp/mp3val-src && \
-    tar xzf /tmp/mp3val-src/mp3val.tar.gz --strip 1 && \
-    make -j$(nproc) -f Makefile.linux && \
-    cp -p mp3val /usr/bin && \
-    git clone https://github.com/acoustid/chromaprint.git /tmp/chromaprint && \
-    cd /tmp/chromaprint && \
-    cmake -DBUILD_TOOLS=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr && \
-    make -j$(nproc) && \
-    make -j$(nproc) install && \
+    apk add --no-cache --allow-untrusted /pkgs/* && \
+    python3 -m ensurepip && \
     pip3 install --no-cache-dir --upgrade \
         pip \
-        wheel \
-        notify \
-        configparser \
-        ndg-httpsclient \
-        paramiko \
-        pillow \
-        psutil \
-        pyopenssl \
-        requests \
-        setuptools \
-        urllib3 \
-        beautifulsoup4 \
-        pillow \
-        requests \
-        unidecode \
-        pylast \
         https://github.com/beetbox/beets/tarball/master \
         https://github.com/Holzhaus/beets-extrafiles/tarball/master \
         beets-bandcamp \
         discogs-client \
         beets-lidarr-fields \
-        flask \
-        pyacoustid && \
+        pyacoustid \
+        wheel \
+        pylast && \
     chmod +x /usr/local/bin/entrypoint.sh && \
     apk del --purge build-dependencies && \
     rm -rf /tmp/*
