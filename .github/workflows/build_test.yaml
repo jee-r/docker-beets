@@ -7,8 +7,8 @@ on:
   push:
     branches:
       - '*'
-      - !master
-      - !dev
+      - '!master'
+      - '!dev'
 jobs:
   build:
     name: Build, tag, and publish Docker image
