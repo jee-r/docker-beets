@@ -37,12 +37,12 @@ jobs:
           install: true
           version: latest
           driver-opts: image=moby/buildkit:master
-      #- name: Login into DockerHub
-      #  uses: docker/login-action@v1
-      #  with:
-      #    registry: registry-1.docker.io
-      #    username: ${{ secrets.DOCKERHUB_USERNAME }}
-      #    password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Login into DockerHub
+        uses: docker/login-action@v1
+        with:
+          registry: registry-1.docker.io
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Login into GitHub Container Registry
         uses: docker/login-action@v1
         with:
@@ -60,6 +60,6 @@ jobs:
             ghcr.io/${{ github.repository }}:${{ env.SHORT_SHA }}
             ghcr.io/${{ github.repository }}:${{ env.MAIN_DOCKER_TAG }}
             ghcr.io/${{ github.repository }}:${{ env.GIT_BRANCH }}
-        #    ${{ env.IMAGE_NAME }}:${{ env.SHORT_SHA }}
-        #    ${{ env.IMAGE_NAME }}:${{ env.MAIN_DOCKER_TAG }}
-        #    ${{ env.IMAGE_NAME }}:${{ env.GIT_BRANCH }} 
+            registry-1.docker.io/${{ env.IMAGE_NAME }}:${{ env.SHORT_SHA }}
+            registry-1.docker.io/${{ env.IMAGE_NAME }}:${{ env.MAIN_DOCKER_TAG }}
+            registry-1.docker.io/${{ env.IMAGE_NAME }}:${{ env.GIT_BRANCH }} 
