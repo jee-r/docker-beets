@@ -11,10 +11,10 @@ This image come with [inotifywait](https://man.archlinux.org/man/inotifywait.1) 
 
 # Supported tags
 
-| Tags | Size | Build |
-|-|-|-|
-| `latest`, `master` | ![](https://img.shields.io/docker/image-size/j33r/beets/latest?style=flat-square) | ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/jee-r/docker-beets/Deploy/master?style=flat-square) 
-| `dev` | ![](https://img.shields.io/docker/image-size/j33r/beets/dev?style=flat-square) | ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/jee-r/docker-beets/Deploy/dev?style=flat-square)
+| Tags | Size | Platforms | Build |
+|-|-|-|-|
+| `latest`, `master` | ![](https://img.shields.io/docker/image-size/j33r/beets/latest?style=flat-square) | `amd64` | ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/jee-r/docker-beets/Deploy/master?style=flat-square) 
+| `dev` | ![](https://img.shields.io/docker/image-size/j33r/beets/dev?style=flat-square)  | `amd64`| ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/jee-r/docker-beets/Deploy/dev?style=flat-square)
 
 # What is Beets ?
 
