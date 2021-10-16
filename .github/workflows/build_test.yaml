@@ -11,7 +11,7 @@ on:
       - '!dev'
 jobs:
   build:
-    name: Build, tag, and publish Docker image
+    name: Test build docker image
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
