@@ -24,7 +24,7 @@ elif [ "$MODE" == 'inotifywait' ]; then
         /usr/local/bin/beet -c "$beets_config" import -q -i --flat "$dir_path"
     done
 elif [ "$MODE" == 'standalone' ]; then
-    /usr/local/bin/beet -c "$$beets_config"
+    /usr/local/bin/beet -c "$beets_config"
     exit 0
 fi
 
