@@ -9,7 +9,7 @@ if [ -w /config/ ] && [ ! -f /config/.config/beets/config.yaml ]; then
     cp /etc/default/beets_config.yaml /config/.config/beets/config.yaml
 fi
 
-BEETSDIR=/config/.config/.beets
+BEETSDIR=/config/.config/beets
 export BEETSDIR
 FPCALC=/usr/bin/fpcalc
 export FPCALC
