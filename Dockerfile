@@ -94,6 +94,7 @@ gcc \
         gdbm \
         gst-plugins-good \
         gstreamer \
+        py3-gobject3 \
         jpeg \
         lame \
         libffi \
