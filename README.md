@@ -34,6 +34,7 @@ All the lines commented in the examples below should be adapted to your environm
 
 Note: `--user $(id -u):$(id -g)` should work out of the box on linux systems. If your docker host run on windows or if you want specify an other user id and group id just replace with the appropriates values.
 
+
 ## With Docker
 
 ```bash
@@ -42,14 +43,17 @@ docker run \
     --interactive \
     --name beets \
     --user $(id -u):$(id -g) \
+    #--publish 4030:4030 \
+    #--env MODE=betanin \
+    #--env BETANIN_HOST=0.0.0.0 \
+    #--env BETANIN_PORT=4030 \
+    #--env WATCH_DIR=/Downloads \
+    --env UMASK_SET=022 \
+    --env TZ=Europe/Paris \
     --volume /etc/localtime:/etc/localtime:ro \
     #--volume ./config:/config \
     #--volume ./MyMusic:/Music \
     #--Volume ./Downloads:/Downloads \
-    --env UMASK_SET=022 \
-    #--env WATCH_DIR=/Downloads \
-    --env TZ=Europe/Paris \
-    #--publish 8337:8337 \
     j33r/beets:latest
 ```
 
@@ -69,11 +73,14 @@ services:
     restart: unless-stopped
     user: $(id -u):$(id -g)
     #ports:
-    #  - 8337:8337
-    environment:
+    #  - 4030:4030
+    #environment:
+      #- MODE=betanin
+      #- BETANIN_HOST="0.0.0.0"
+      #- BETANIN_PORT="4030"
       #- WATCH_DIR=/Downloads
-      - UMASK_SET=022
-      - TZ=Europe/Paris
+      #- UMASK_SET=022
+      #- TZ=Europe/Paris
     volumes:
       #- ./config:/config
       #- ./Download:/Download
@@ -85,7 +92,10 @@ services:
 
 Due to the ephemeral nature of Docker containers these images provide a number of optional volume mounts to persist data outside of the container:
 
-- `/config`: The Beets config directory containing `config.yaml`.
+- `/config` contain : 
+  - `.config/beets`: The Beets config directory containing `config.yaml`.
+  - `.config/betanin`: The Betanin config directory containing `config.toml`.
+  - `.local/share/betanin/`: Containing `betanin.db` and `secret_key` files.
 - `/Downloads`: Incomming directory, this is where new music are comming must match with `WATCH_DIR` variable.
 - `/Music`: Final directory where are audio files moved after beets process is done.
 - `etc/localtime`: This directory is for have the same time as host inthe container.
@@ -94,10 +104,30 @@ You should create directory before run the container otherwise directories are c
 
 ## Environment variables
 
-- `WATCH_DIR`: This is where inotifywait will watch for incomming files , inotifywait is launched by default in the [`entrypoint.sh` script](/rootfs/usr/local/bin/entrypoint.sh)   
+- `MODE`: automation mode `inotifywait`|`betanin`|`standalone`  (default: `betanin`)
+- `WATCH_DIR`: This is where `inotifywait` will watch for incomming files , only used in `inotify` `MODE`.
 - `TZ`: To change the timezone of the container set the `TZ` environment variable. The full list of available options can be found on [Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 - `UMASK`: set permission of files created by the container process. More info on [ArchLinux Wiki](https://wiki.archlinux.org/title/Umask) [ArchLinux Wiki](https://wiki.archlinux.org/title/Umask).
 
+## Ports
+
+- `4030`: Betanin default port can be changed in betanin config file.
+
+## Automation
+
+This image come with [Inotifywait](https://man.archlinux.org/man/inotifywait.1) and [Betanin](https://github.com/sentriz/betanin) this tools are used for automatic import/rename/tag new audio files.
+
+### Inotifywait
+
+[Inotifywait](https://man.archlinux.org/man/inotifywait.1) efficiently waits for changes and automatic import/rename/tag new audio file in the `WATCH_DIR`.
+
+### Betanin
+
+[Betanin](https://github.com/sentriz/betanin) is a [beets](https://beets.io) based man-in-the-middle of your torrent client and music player
+
+[Betanin](https://github.com/sentriz/betanin) receive call from torrent client when the download is done then add the news files to the import queue process. 
+
+more info : https://github.com/sentriz/betanin
 # License
 
 This project is under the [GNU Generic Public License v3](/LICENSE) to allow free use while ensuring it stays open.
