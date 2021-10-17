@@ -5,9 +5,8 @@
 [![DockerHub](https://img.shields.io/badge/Dockerhub-j33r/beets-%232496ED?logo=docker&style=flat-square)](https://hub.docker.com/r/j33r/beets)
 [![ghcr.io](https://img.shields.io/badge/ghrc%2Eio-jee%2D-r/beets-%232496ED?logo=github&style=flat-square)](https://ghcr.io/jee-r/beets)
 
-A docker image for [beets](https://beets.io) ![beet's logo](https://imgur.com/nTxLjGG.png)
+A docker image for [beets](https://beets.io) ![beet's logo](https://imgur.com/nTxLjGG.png) with [automation](#automation) 
 
-This image come with [inotifywait](https://man.archlinux.org/man/inotifywait.1) for automatic rename/tag new audio file in the `WATCH_DIR`. see the `entrypoint.sh` script
 
 # Supported tags
 
@@ -112,6 +111,7 @@ You should create directory before run the container otherwise directories are c
 ## Ports
 
 - `4030`: Betanin default port can be changed in betanin config file.
+
 
 ## Automation
 
