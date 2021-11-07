@@ -70,7 +70,7 @@ RUN apk update && \
         make \
         cmake \
         g++ \
-gcc \
+        gcc \
         musl-dev \
         cargo \
         libffi-dev \
