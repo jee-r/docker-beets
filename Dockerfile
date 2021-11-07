@@ -46,6 +46,8 @@ ENV HOME=/config \
     MODE=betanin \
     BETANIN_HOST=0.0.0.0 \
     BETANIN_PORT=4030 \
+    BEETSDIR=/config/.config/beets \
+    FPCALC=/usr/bin/fpcalc \
     UMASK_SET=022 \
     TZ=Europe/Paris
 
