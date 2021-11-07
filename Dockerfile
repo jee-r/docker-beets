@@ -109,7 +109,7 @@ gcc \
         pip \
         https://github.com/beetbox/beets/tarball/master \
         https://github.com/Holzhaus/beets-extrafiles/tarball/master \
-        beets-bandcamp \
+        beetcamp \
         discogs-client \
         beets-lidarr-fields \
         pyacoustid \
