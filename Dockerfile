@@ -110,7 +110,8 @@ RUN apk update && \
     pip3 install --no-cache-dir --upgrade \
         pip \
         https://github.com/beetbox/beets/tarball/master \
-        https://github.com/Holzhaus/beets-extrafiles/tarball/master \
+        #https://github.com/Holzhaus/beets-extrafiles/tarball/master \
+        https://github.com/jee-r/beets-extrafiles/tarball/main \
         beetcamp \
         discogs-client \
         beets-lidarr-fields \
