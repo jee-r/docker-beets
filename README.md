@@ -105,13 +105,13 @@ You should create directory before run the container otherwise directories are c
 
 - `MODE`: automation mode `inotifywait`|`betanin`|`standalone`  (default: `betanin`)
 - `WATCH_DIR`: This is where `inotifywait` will watch for incomming files , only used in `inotify` `MODE`.
+- `BEETS_ARGS`: add [arguments](https://beets.readthedocs.io/en/stable/reference/cli.html#import) to beet import command in entrypoint file (optional, default: `none`) 
 - `TZ`: To change the timezone of the container set the `TZ` environment variable. The full list of available options can be found on [Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 - `UMASK`: set permission of files created by the container process. More info on [ArchLinux Wiki](https://wiki.archlinux.org/title/Umask) [ArchLinux Wiki](https://wiki.archlinux.org/title/Umask).
 
 ## Ports
 
 - `4030`: Betanin default port can be changed in betanin config file.
-
 
 ## Automation
 
