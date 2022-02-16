@@ -12,7 +12,7 @@ A docker image for [beets](https://beets.io) ![beet's logo](https://imgur.com/nT
 
 | Tags | Size | Platforms | Build |
 |-|-|-|-|
-| `latest`, `master` | ![](https://img.shields.io/docker/image-size/j33r/beets/latest?style=flat-square) | `amd64` | ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/jee-r/docker-beets/Deploy/master?style=flat-square) 
+| `latest` | ![](https://img.shields.io/docker/image-size/j33r/beets/latest?style=flat-square) | `amd64` | ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/jee-r/docker-beets/Deploy/master?style=flat-square) 
 | `dev` | ![](https://img.shields.io/docker/image-size/j33r/beets/dev?style=flat-square)  | `amd64`| ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/jee-r/docker-beets/Deploy/dev?style=flat-square)
 
 # What is Beets ?
