@@ -5,7 +5,6 @@ if [ ! -d "/config/.config/beets" ]; then
 fi
 
 if [ -w /config/ ] && [ ! -f /config/.config/beets/config.yaml ]; then
-
     cp /etc/default/beets_config.yaml /config/.config/beets/config.yaml
 fi
 
@@ -21,10 +20,10 @@ if [ "$MODE" == betanin ]; then
     /usr/bin/betanin
 elif [ "$MODE" == 'inotifywait' ]; then
     inotifywait -m -e create,moved_to --format '%w%f' "$WATCH_DIR" | while IFS= read -r dir_path; do
-        /usr/local/bin/beet -c "$beets_config" import -q -i --flat "$BEETS_ARGS" "$dir_path"
+        /usr/bin/beet -c "$beets_config" import -q -i --flat "$BEETS_ARGS" "$dir_path"
     done
 elif [ "$MODE" == 'standalone' ]; then
-    /usr/local/bin/beet -c "$beets_config"
+    /usr/bin/beet -c "$beets_config"
     exit 0
 fi
 
