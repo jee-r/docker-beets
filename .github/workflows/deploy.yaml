@@ -32,6 +32,8 @@ jobs:
         run: echo $ENV
       - name: Checkout repository
         uses: actions/checkout@v2
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
         id: buildx
         uses: docker/setup-buildx-action@v1
