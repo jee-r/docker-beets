@@ -3,10 +3,12 @@ on:
   pull_request:
     branches:
       - main
+      - dev
   push:
     branches:
       - '*'
       - '!main'
+      - '!dev'
 jobs:
   build:
     name: Test build docker image
