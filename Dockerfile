@@ -122,7 +122,8 @@ RUN apk update && \
         pillow \
         unidecode \
         pylast && \
-    git clone https://github.com/sentriz/betanin.git/ && \
+   #git clone https://github.com/sentriz/betanin.git/ && \
+    git clone --single-branch --branch dev https://github.com/jee-r/betanin.git/ && \
     cd /src/betanin && \
     pip3 install --no-cache-dir . --requirement requirements-docker.txt && \
     chmod +x /usr/local/bin/entrypoint.sh && \
