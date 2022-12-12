@@ -97,12 +97,13 @@ RUN apk update && \
         gst-plugins-good \
         gstreamer \
         py3-gobject3 \
-        jpeg \
         lame \
         libffi \
-        libpng \
         libev \
         mpg123 \
+	imagemagick \
+        jpeg \
+        libpng \
         openjpeg \
         sqlite-libs && \
     apk add --no-cache --allow-untrusted /pkgs/* && \
