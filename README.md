@@ -1,7 +1,7 @@
 # docker-beets
 
 [![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/j33r/beets?style=flat-square)](https://microbadger.com/images/j33r/beets)
-![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/jee-r/docker-beets/Deploy/master?style=flat-square)
+![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/jee-r/docker-beets/deploy.yaml?branch=main&style=flat-square)
 [![Docker Pulls](https://img.shields.io/docker/pulls/j33r/beets?style=flat-square)](https://hub.docker.com/r/j33r/beets)
 [![DockerHub](https://img.shields.io/badge/Dockerhub-j33r/beets-%232496ED?logo=docker&style=flat-square)](https://hub.docker.com/r/j33r/beets)
 [![ghcr.io](https://img.shields.io/badge/ghrc%2Eio-jee%2D-r/beets-%232496ED?logo=github&style=flat-square)](https://ghcr.io/jee-r/beets)
