@@ -10,7 +10,7 @@ RUN apt-get update -qq && \
     npm install && \
     PRODUCTION=true npm run-script build
 
-FROM alpine:3.15 AS builder-mp3gain
+FROM alpine:3.18 AS builder-mp3gain
 WORKDIR /tmp
 COPY build/mp3gain/APKBUILD .
 RUN apk update && \
@@ -18,7 +18,7 @@ RUN apk update && \
     abuild-keygen -a -n && \
     REPODEST=/tmp/out abuild -F -r
 
-FROM alpine:3.15 AS builder-mp3val
+FROM alpine:3.18 AS builder-mp3val
 WORKDIR /tmp
 COPY build/mp3val/APKBUILD .
 RUN apk update && \
@@ -26,7 +26,7 @@ RUN apk update && \
     abuild-keygen -a -n && \
     REPODEST=/tmp/out abuild -F -r
 
-FROM alpine:3.15
+FROM alpine:3.18
 
 LABEL name="docker-beets" \
       maintainer="Jee jee@jeer.fr" \
