@@ -1,4 +1,4 @@
-FROM node:16.18.1-bullseye-slim AS builder-frontend
+FROM node:16.20.2-bullseye-slim AS builder-frontend
 WORKDIR /src
 RUN apt-get update -qq && \
     apt-get install -y -qq --no-install-recommends \
