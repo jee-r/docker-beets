@@ -1,16 +1,11 @@
-FROM node:16.18.1-bullseye-slim AS builder-frontend
+FROM node:16-alpine3.17 AS builder-frontend
 WORKDIR /src
-RUN apt-get update -qq && \
-    apt-get install -y -qq --no-install-recommends \
-        git \
-        ca-certificates \
-        build-essential && \
-    git clone https://github.com/sentriz/betanin.git . && \ 
-    cd /src/betanin_client && \
+RUN apk add git && \
+    git clone https://github.com/sentriz/betanin.git . && \
     npm install && \
     PRODUCTION=true npm run-script build
 
-FROM alpine:3.15 AS builder-mp3gain
+FROM alpine:3.18 AS builder-mp3gain
 WORKDIR /tmp
 COPY build/mp3gain/APKBUILD .
 RUN apk update && \
@@ -18,7 +13,7 @@ RUN apk update && \
     abuild-keygen -a -n && \
     REPODEST=/tmp/out abuild -F -r
 
-FROM alpine:3.15 AS builder-mp3val
+FROM alpine:3.18 AS builder-mp3val
 WORKDIR /tmp
 COPY build/mp3val/APKBUILD .
 RUN apk update && \
@@ -26,7 +21,7 @@ RUN apk update && \
     abuild-keygen -a -n && \
     REPODEST=/tmp/out abuild -F -r
 
-FROM alpine:3.15
+FROM alpine:3.18
 
 LABEL name="docker-beets" \
       maintainer="Jee jee@jeer.fr" \
@@ -101,7 +96,7 @@ RUN apk update && \
         libffi \
         libev \
         mpg123 \
-	imagemagick \
+	    imagemagick \
         jpeg \
         libpng \
         openjpeg \
