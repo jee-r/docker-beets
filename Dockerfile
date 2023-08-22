@@ -101,7 +101,8 @@ RUN apk update && \
         jpeg \
         libpng \
         openjpeg \
-        sqlite-libs && \
+        sqlite-libs \
+        keyfinder-cli && \
     apk add --no-cache --allow-untrusted /pkgs/* && \
     python3 -m ensurepip && \
     pip3 install --no-cache-dir --upgrade \
@@ -112,6 +113,7 @@ RUN apk update && \
         beetcamp \
         discogs-client \
         beets-lidarr-fields \
+        beets-noimport \
         pyacoustid \
         wheel \
         requests \
@@ -119,10 +121,13 @@ RUN apk update && \
         pillow \
         unidecode \
         pylast && \
+    # Install Betanin
     git clone https://github.com/sentriz/betanin.git/ && \
     #git clone --single-branch --branch dev https://github.com/jee-r/betanin.git/ && \
     cd /src/betanin && \
-    pip3 install --no-cache-dir . --requirement requirements-docker.txt && \
+    # we don't need to install requirement below all deps is already installed 
+    # see https://github.com/sentriz/betanin/blob/master/requirements-docker.txt
+    #pip3 install --no-cache-dir . --requirement requirements-docker.txt && \
     chmod +x /usr/local/bin/entrypoint.sh && \
     apk del --purge build-dependencies && \
     rm -rf /tmp/* /pkgs ~/.cache 
