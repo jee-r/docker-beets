@@ -2,6 +2,7 @@ FROM node:16-alpine3.17 AS builder-frontend
 WORKDIR /src
 RUN apk add git && \
     git clone https://github.com/sentriz/betanin.git . && \
+    cd /src/betanin_client && \
     npm install && \
     PRODUCTION=true npm run-script build
 
