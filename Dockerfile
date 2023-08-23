@@ -111,7 +111,7 @@ RUN apk update && \
         #https://github.com/Holzhaus/beets-extrafiles/tarball/master \
         https://github.com/jee-r/beets-extrafiles/tarball/main \
         beetcamp \
-        discogs-client \
+        python3-discogs-client \
         beets-lidarr-fields \
         beets-noimport \
         pyacoustid \
