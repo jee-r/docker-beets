@@ -97,7 +97,7 @@ RUN apk update && \
         libffi \
         libev \
         mpg123 \
-	    imagemagick \
+        imagemagick \
         jpeg \
         libpng \
         openjpeg \
@@ -122,12 +122,8 @@ RUN apk update && \
         unidecode \
         pylast && \
     # Install Betanin
-    git clone https://github.com/sentriz/betanin.git/ && \
-    #git clone --single-branch --branch dev https://github.com/jee-r/betanin.git/ && \
-    cd /src/betanin && \
-    # we don't need to install requirement below all deps is already installed 
-    # see https://github.com/sentriz/betanin/blob/master/requirements-docker.txt
-    #pip3 install --no-cache-dir . --requirement requirements-docker.txt && \
+    pip3 install --no-cache-dir --upgrade \
+        git+https://github.com/sentriz/betanin.git && \
     chmod +x /usr/local/bin/entrypoint.sh && \
     apk del --purge build-dependencies && \
     rm -rf /tmp/* /pkgs ~/.cache 
