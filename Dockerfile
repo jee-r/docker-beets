@@ -51,6 +51,7 @@ RUN apk update && \
     apk upgrade && \
     apk add --no-cache --virtual=base --upgrade \
         bash \
+	bash-completion \
         vim \
         curl \
         wget \
@@ -121,6 +122,8 @@ RUN apk update && \
         pillow \
         unidecode \
         pylast && \
+	# install Beet Bash completion
+	beet completion > /usr/share/bash-completion/completions/beet && \
     # Install Betanin
     pip3 install --no-cache-dir --upgrade \
         git+https://github.com/sentriz/betanin.git && \
