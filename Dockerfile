@@ -1,4 +1,4 @@
-FROM node:16-alpine3.17 AS builder-frontend
+FROM node:16-alpine3.18 AS builder-frontend
 WORKDIR /src
 RUN apk add git && \
     git clone https://github.com/sentriz/betanin.git . && \
@@ -6,7 +6,7 @@ RUN apk add git && \
     npm install && \
     PRODUCTION=true npm run-script build
 
-FROM alpine:3.18 AS builder-mp3gain
+FROM alpine:3.19 AS builder-mp3gain
 WORKDIR /tmp
 COPY build/mp3gain/APKBUILD .
 RUN apk update && \
@@ -14,7 +14,7 @@ RUN apk update && \
     abuild-keygen -a -n && \
     REPODEST=/tmp/out abuild -F -r
 
-FROM alpine:3.18 AS builder-mp3val
+FROM alpine:3.19 AS builder-mp3val
 WORKDIR /tmp
 COPY build/mp3val/APKBUILD .
 RUN apk update && \
@@ -22,7 +22,7 @@ RUN apk update && \
     abuild-keygen -a -n && \
     REPODEST=/tmp/out abuild -F -r
 
-FROM alpine:3.18
+FROM alpine:3.19
 
 LABEL name="docker-beets" \
       maintainer="Jee jee@jeer.fr" \
@@ -51,7 +51,7 @@ RUN apk update && \
     apk upgrade && \
     apk add --no-cache --virtual=base --upgrade \
         bash \
-	bash-completion \
+	    bash-completion \
         vim \
         curl \
         wget \
@@ -83,6 +83,7 @@ RUN apk update && \
         fftw-dev && \
     apk add --upgrade --no-cache \
         python3 \
+        py3-pip \
         inotify-tools \
         chromaprint \
         expat \
@@ -103,11 +104,11 @@ RUN apk update && \
         libpng \
         openjpeg \
         sqlite-libs \
-        keyfinder-cli && \
-    apk add --no-cache --allow-untrusted /pkgs/* && \
-    python3 -m ensurepip && \
-    pip3 install --no-cache-dir --upgrade \
-        pip \
+        keyfinder-cli
+
+RUN apk add --no-cache --allow-untrusted /pkgs/* && \
+    # python3 -m ensurepip && \
+    pip3 install --no-cache-dir --upgrade --break-system-packages \
         https://github.com/beetbox/beets/tarball/master \
         #https://github.com/Holzhaus/beets-extrafiles/tarball/master \
         https://github.com/jee-r/beets-extrafiles/tarball/main \
@@ -125,7 +126,7 @@ RUN apk update && \
 	# install Beet Bash completion
 	beet completion > /usr/share/bash-completion/completions/beet && \
     # Install Betanin
-    pip3 install --no-cache-dir --upgrade \
+    pip3 install --no-cache-dir --upgrade --break-system-packages \
         git+https://github.com/sentriz/betanin.git && \
     chmod +x /usr/local/bin/entrypoint.sh && \
     apk del --purge build-dependencies && \
