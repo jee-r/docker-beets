@@ -6,23 +6,7 @@ RUN apk add git && \
     npm install && \
     PRODUCTION=true npm run-script build
 
-FROM alpine:3.19 AS builder-mp3gain
-WORKDIR /tmp
-COPY build/mp3gain/APKBUILD .
-RUN apk update && \
-    apk add --no-cache abuild && \
-    abuild-keygen -a -n && \
-    REPODEST=/tmp/out abuild -F -r
-
-FROM alpine:3.19 AS builder-mp3val
-WORKDIR /tmp
-COPY build/mp3val/APKBUILD .
-RUN apk update && \
-    apk add --no-cache abuild && \
-    abuild-keygen -a -n && \
-    REPODEST=/tmp/out abuild -F -r
-
-FROM alpine:3.19
+FROM alpine:3.19 AS main
 
 LABEL name="docker-beets" \
       maintainer="Jee jee@jeer.fr" \
@@ -33,8 +17,6 @@ LABEL name="docker-beets" \
 
 COPY rootfs /
 COPY --from=builder-frontend /src/betanin_client/dist/ /src/betanin_client/dist/
-COPY --from=builder-mp3gain /tmp/out/*/*.apk /pkgs/
-COPY --from=builder-mp3val /tmp/out/*/*.apk /pkgs/
 
 WORKDIR /src
 
@@ -106,8 +88,9 @@ RUN apk update && \
         sqlite-libs \
         keyfinder-cli
 
-RUN apk add --no-cache --allow-untrusted /pkgs/* && \
-    # python3 -m ensurepip && \
+RUN apk add --no-cache --virtual=mp3gain --upgrade --repository="https://dl-cdn.alpinelinux.org/alpine/edge/testing/" \
+        mp3gain \
+        mp3val && \
     pip3 install --no-cache-dir --upgrade --break-system-packages \
         https://github.com/beetbox/beets/tarball/master \
         #https://github.com/Holzhaus/beets-extrafiles/tarball/master \
