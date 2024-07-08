@@ -6,7 +6,7 @@ RUN apk add git && \
     npm install && \
     PRODUCTION=true npm run-script build
 
-FROM alpine:3.19 AS main
+FROM alpine:3.20 AS main
 
 LABEL name="docker-beets" \
       maintainer="Jee jee@jeer.fr" \
