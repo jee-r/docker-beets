@@ -1,4 +1,4 @@
-FROM node:16-alpine3.18 AS builder-frontend
+FROM node:22-alpine3.18 AS builder-frontend
 WORKDIR /src
 RUN apk add git && \
     git clone https://github.com/sentriz/betanin.git . && \
