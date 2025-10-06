@@ -55,7 +55,7 @@ RUN apk update && \
         musl-dev \
         cargo \
         libffi-dev \
-        zlib-dev \ 
+        zlib-dev \
         python3-dev \
         openssl-dev \
         jpeg-dev \
@@ -92,7 +92,7 @@ RUN apk add --no-cache --virtual=mp3gain --upgrade --repository="https://dl-cdn.
         mp3gain \
         mp3val && \
     pip3 install --no-cache-dir --upgrade --break-system-packages \
-        https://github.com/beetbox/beets/tarball/master \
+        https://github.com/beetbox/beets/archive/refs/tags/v2.4.0.tar.gz \
         #https://github.com/Holzhaus/beets-extrafiles/tarball/master \
         https://github.com/jee-r/beets-extrafiles/tarball/main \
         beetcamp \
