@@ -3,6 +3,23 @@
   "extends": [
     "config:base"
   ],
+  "packageRules": [
+    {
+      "packagePatterns": ["beets"],
+      "enabled": true,
+      "versioning": "semver",
+      "extractVersion": "^https://github.com/beetbox/beets/archive/refs/tags/(.*).tar.gz$",
+      "automerge": true,
+      "automergeType": "branch",
+      "automergeStrategy": "all",
+      "minor": {
+        "automerge": false
+      },
+      "patch": {
+        "automerge": true
+      }
+    }
+  ],
    "regexManagers": [
     {
       "fileMatch": [
