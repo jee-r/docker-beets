@@ -19,6 +19,7 @@ COPY rootfs /
 COPY --from=builder-frontend /src/betanin_client/dist/ /src/betanin_client/dist/
 
 WORKDIR /src
+ARG BEET_VERSION=2.5.1
 
 ENV HOME=/config \
     MODE=betanin \
@@ -92,7 +93,7 @@ RUN apk add --no-cache --virtual=mp3gain --upgrade --repository="https://dl-cdn.
         mp3gain \
         mp3val && \
     pip3 install --no-cache-dir --upgrade --break-system-packages \
-        https://github.com/beetbox/beets/archive/refs/tags/v2.4.0.tar.gz \
+        https://github.com/beetbox/beets/archive/refs/tags/v${BEET_VERSION}.tar.gz \
         #https://github.com/Holzhaus/beets-extrafiles/tarball/master \
         https://github.com/jee-r/beets-extrafiles/tarball/main \
         beetcamp \
@@ -106,8 +107,8 @@ RUN apk add --no-cache --virtual=mp3gain --upgrade --repository="https://dl-cdn.
         pillow \
         unidecode \
         pylast && \
-	# install Beet Bash completion
-	beet completion > /usr/share/bash-completion/completions/beet && \
+	  # install Beet Bash completion
+	  beet completion > /usr/share/bash-completion/completions/beet && \
     # Install Betanin
     pip3 install --no-cache-dir --upgrade --break-system-packages \
         git+https://github.com/sentriz/betanin.git && \
